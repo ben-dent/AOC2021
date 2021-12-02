@@ -5,12 +5,12 @@ fun main() {
 
         for (pair in input) {
             val command = pair.first
-            val X = pair.second
+            val x = pair.second
 
             when (command) {
-                "forward" -> horizontal += X
-                "down" -> depth += X
-                "up" -> depth -= X
+                "forward" -> horizontal += x
+                "down" -> depth += x
+                "up" -> depth -= x
             }
         }
 
@@ -24,15 +24,15 @@ fun main() {
 
         for (pair in input) {
             val command = pair.first
-            val X = pair.second
+            val x = pair.second
 
             when (command) {
                 "forward" -> {
-                    horizontal += X
-                    depth += (aim * X)
+                    horizontal += x
+                    depth += (aim * x)
                 }
-                "down" -> aim += X
-                "up" -> aim -= X
+                "down" -> aim += x
+                "up" -> aim -= x
             }
         }
 
