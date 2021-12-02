@@ -39,7 +39,7 @@ fun main() {
         return (depth * horizontal)
     }
 
-    fun buildPairs(input: List<String>) = input.map { Pair(it.split(" ") [0], Integer.parseInt(it.split(" ") [1]))}
+    fun buildPairs(input: List<String>) = input.map { Pair(it.split(" ") [0], it.split(" ") [1].toInt())}
 
     // test if implementation meets criteria from the description, like:
     val testInput = readInput("Day02_test")
