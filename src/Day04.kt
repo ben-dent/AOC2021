@@ -1,10 +1,6 @@
 fun main() {
     fun part1(input: List<String>): Int {
-        val gameNumbers = input[0].split(",").map { Integer.parseInt(it) }
-
-        val boardInfo = input.subList(2, input.size).map { it.trim() }
-
-        val boards = buildBoards(boardInfo)
+        val (gameNumbers, boards) = setup(input)
 
         for (value in gameNumbers) {
             for (board in boards) {
@@ -18,16 +14,46 @@ fun main() {
     }
 
     fun part2(input: List<String>): Int {
-        return input.size
+        val (gameNumbers, boards) = setup(input)
+
+        val hasWon = HashSet<Board>()
+
+        for (value in gameNumbers) {
+            for (board in boards) {
+                if (!hasWon.contains(board)) {
+                    if (board.playTurn(value)) {
+                        if (hasWon.count() == boards.size - 1) {
+                            return value * board.unmarked.sum()
+                        } else {
+                            hasWon.add(board)
+                        }
+                    }
+                }
+            }
+        }
+
+        return -1
     }
 
     // test if implementation meets criteria from the description, like:
     val testInput = readInput("Day04_test")
 
     check(part1(testInput) == 4512)
+    check(part2(testInput) == 1924)
 
     val input = readInput("Day04")
     println(part1(input))
+    println(part2(input))
+}
+
+fun setup(input: List<String>): Pair<List<Int>, List<Board>> {
+    val gameNumbers = input[0].split(",").map { Integer.parseInt(it) }
+
+    val boardInfo = input.subList(2, input.size).map { it.trim() }
+
+    val boards = buildBoards(boardInfo)
+
+    return Pair(gameNumbers, boards)
 }
 
 fun buildBoards(input: List<String> ): List<Board> {
