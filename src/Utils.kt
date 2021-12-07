@@ -9,6 +9,12 @@ import java.security.MessageDigest
 fun readInput(name: String) = File("src", "$name.txt").readLines()
 
 /**
+ * Reads from the given input txt file as a single String.
+ */
+
+fun readFullInput(name: String) = File("src", "$name.txt").readText()
+
+/**
  * Reads lines from the given input txt file and returns as a List<Int>.
  */
 
@@ -35,4 +41,12 @@ fun binaryToDecimal(binary: List<Int>): Int {
     }
 
     return current
+}
+
+/**
+ * Converts from a String of comma-separated ints to a list of ints
+ */
+
+fun splitIntsOnComma(input: String): List<Int> {
+    return input.split(",").map { it.toInt() }
 }
